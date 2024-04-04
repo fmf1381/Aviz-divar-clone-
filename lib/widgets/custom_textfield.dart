@@ -3,12 +3,19 @@ import 'package:aviz/themes/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key, required this.hintText, this.controller, this.maxLines,this.keyboardType});
+
   final String hintText;
   final TextEditingController? controller;
   final int? maxLines;
   final TextInputType? keyboardType;
+
+  const CustomTextField({
+    super.key,
+    required this.hintText,
+    this.controller,
+    this.maxLines,
+    this.keyboardType,
+  });
 
   @override
   Widget build(BuildContext context) {
