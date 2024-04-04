@@ -85,7 +85,7 @@ class _CustomTextFieldPropertiesState extends State<CustomTextFieldProperties> {
               ),
               GestureDetector(
                 onTap: () {
-                  decrement();
+                    decrement();
                 },
                 child: SizedBox(
                     width: 12,
