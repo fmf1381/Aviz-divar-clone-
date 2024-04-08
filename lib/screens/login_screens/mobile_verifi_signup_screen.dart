@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aviz/screens/main_screen.dart';
 import 'package:aviz/themes/text_style.dart';
 import 'package:aviz/widgets/custom_textfield_register_code.dart';
@@ -27,29 +29,9 @@ class MobileVerifiSignUpScreen extends StatelessWidget {
               style: Style.grey500_14px_400w,
             ),
             const SizedBox(height: 32),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomTextFieldRegisterCode(),
-                CustomTextFieldRegisterCode(),
-                CustomTextFieldRegisterCode(),
-                CustomTextFieldRegisterCode(),
-              ],
-            ),
+            const FieldRegisterCodeRow(),
             const SizedBox(height: 32),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '00:45',
-                  style: Style.grey700_18px_500w,
-                ),
-                Text(
-                  ' ارسال مجدد کد',
-                  style: Style.grey700_14px_400w,
-                ),
-              ],
-            ),
+            const CodeResendTimer(),
             const Spacer(),
             Directionality(
               textDirection: TextDirection.ltr,
@@ -76,6 +58,140 @@ class MobileVerifiSignUpScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class FieldRegisterCodeRow extends StatefulWidget {
+  const FieldRegisterCodeRow({
+    super.key,
+  });
+
+  @override
+  State<FieldRegisterCodeRow> createState() => _FieldRegisterCodeRowState();
+}
+
+class _FieldRegisterCodeRowState extends State<FieldRegisterCodeRow> {
+  final List<TextEditingController> _controllers =
+      List.generate(4, (index) => TextEditingController());
+  final List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
+
+  @override
+  void initState() {
+    super.initState();
+
+    for (int i = 0; i < _controllers.length; i++) {
+      _controllers[i].addListener(() {
+        if (_controllers[i].text.length == 1 && i < _controllers.length - 1) {
+          _focusNodes[i + 1].requestFocus();
+        }
+        if (_controllers.last.text.length == 1) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return const Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: MainScreen(),
+                );
+              },
+            ),
+          );
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      textDirection: TextDirection.ltr,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(
+        4,
+        (index) => CustomTextFieldRegisterCode(
+          controller: _controllers[index],
+          focusNode: _focusNodes[index],
+        ),
+      ),
+    );
+  }
+}
+
+class CodeResendTimer extends StatefulWidget {
+  const CodeResendTimer({
+    super.key,
+  });
+
+  @override
+  State<CodeResendTimer> createState() => _CodeResendTimerState();
+}
+
+class _CodeResendTimerState extends State<CodeResendTimer> {
+  Timer? timer;
+  int start = 45;
+
+  void startTime() {
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(oneSec, (timer) {
+      if (start == 0) {
+        setState(() {
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          start--;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTime();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '00:$start',
+          style: Style.grey700_18px_500w,
+        ),
+        InkWell(
+          onTap: () {
+            if (start == 0) {
+              start = 45;
+              startTime();
+            }
+          },
+          child: Text(
+            ' ارسال مجدد کد',
+            style: (start != 0)
+                ? Style.grey400_14px_400w
+                : Style.grey700_14px_400w,
+          ),
+        ),
+      ],
     );
   }
 }

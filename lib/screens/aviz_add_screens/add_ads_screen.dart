@@ -41,7 +41,14 @@ class _AddAdsScreenState extends State<AddAdsScreen> {
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.ease),
               child: Image.asset('assets/images/arrow_right.png')),
-          actions: [Image.asset('assets/images/close_square.png')],
+          actions: [
+            InkWell(
+              onTap: () {
+                pageController!.jumpToPage(0);
+              },
+              child: Image.asset('assets/images/close_square.png'),
+            ),
+          ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4),
             child: LinearProgressIndicator(
@@ -56,7 +63,7 @@ class _AddAdsScreenState extends State<AddAdsScreen> {
           physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (value) {
             setState(() {
-              progressValue = ((value + 1) / 10) * 2;
+              progressValue = ((value) / 10) * 2;
               pageViewValue = value;
             });
           },

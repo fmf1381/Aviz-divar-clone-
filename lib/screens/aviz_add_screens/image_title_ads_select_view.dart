@@ -87,7 +87,10 @@ class AdsImagesSelectSection extends StatelessWidget {
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size(150, 40)),
-                    icon: const Icon(Iconsax.document_upload),
+                    icon: const Icon(
+                      Iconsax.document_upload,
+                      color: Colors.white,
+                    ),
                     label: const Text(
                       'انتخاب تصویر',
                       style: Style.white_16px_500w,

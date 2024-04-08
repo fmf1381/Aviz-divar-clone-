@@ -3,7 +3,7 @@ import 'package:aviz/themes/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CategoryButton extends StatelessWidget {
-  CategoryButton({super.key, this.text = '',this.onTap});
+  CategoryButton({super.key, this.text = '', this.onTap});
   final String text;
   void Function()? onTap;
 

@@ -32,7 +32,10 @@ class LocationSelector extends StatelessWidget {
           width: 186,
           child: ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Iconsax.location),
+              icon: const Icon(
+                Iconsax.location,
+                color: Colors.white,
+              ),
               label: const Text(
                 'گرگان، صیاد شیرازی...',
                 style: Style.white_16px_500w,

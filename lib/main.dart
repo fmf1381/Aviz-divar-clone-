@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        elevatedButtonTheme: ElevatedBottomTheme(),
-        outlinedButtonTheme: OutlineBottomTheme(),
-      ),
+          elevatedButtonTheme: ElevatedBottomTheme(),
+          outlinedButtonTheme: OutlineBottomTheme(),
+          useMaterial3: false),
       home: Directionality(
           textDirection: TextDirection.rtl,
           // ignore: dead_code
-          child: (isLogin) ? MainScreen() : LoginOrSignUpScreen()),
+          child: (isLogin) ? const MainScreen() : const LoginOrSignUpScreen()),
     );
   }
 }

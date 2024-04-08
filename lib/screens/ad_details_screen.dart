@@ -468,7 +468,10 @@ class CallChatButtons extends StatelessWidget {
           Expanded(
             child: ElevatedButton.icon(
                 onPressed: () {},
-                icon: const Icon(Iconsax.message),
+                icon: const Icon(
+                  Iconsax.message,
+                  color: Colors.white,
+                ),
                 label: const Text(
                   'گفتگو',
                   style: Style.white_16px_500w,
@@ -478,7 +481,10 @@ class CallChatButtons extends StatelessWidget {
           Expanded(
             child: ElevatedButton.icon(
                 onPressed: () {},
-                icon: const Icon(Iconsax.call),
+                icon: const Icon(
+                  Iconsax.call,
+                  color: Colors.white,
+                ),
                 label: const Text(
                   'اطلاعات تماس',
                   style: Style.white_16px_500w,

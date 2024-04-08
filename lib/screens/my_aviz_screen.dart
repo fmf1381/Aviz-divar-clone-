@@ -161,7 +161,7 @@ class AccountDetailsCard extends StatelessWidget {
                 const Row(
                   children: [
                     Text(
-                      'سید محمد جواد هاشمی',
+                      'فهیم فولادی',
                       style: Style.grey700_14px_400w,
                     ),
                     Spacer(),

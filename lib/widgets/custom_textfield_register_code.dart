@@ -22,7 +22,9 @@ class _CustomTextFieldRegisterCodeState
       height: 48,
       width: 74,
       child: TextField(
+        autofocus: true,
         controller: widget.controller,
+        focusNode: widget.focusNode,
         onChanged: (value) {
           setState(() {
             _isFilled = value.isNotEmpty;
