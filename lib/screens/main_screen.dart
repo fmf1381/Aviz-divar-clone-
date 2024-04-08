@@ -2,6 +2,7 @@ import 'package:aviz/constants/custome_colors.dart';
 import 'package:aviz/screens/ads_screen.dart';
 import 'package:aviz/screens/aviz_add_screens/add_ads_screen.dart';
 import 'package:aviz/screens/my_aviz_screen.dart';
+import 'package:aviz/search_screen.dart';
 import 'package:aviz/themes/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -67,7 +68,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _getlayout() {
     return <Widget>[
       const AdsScreen(),
-      const AdsScreen(),
+      const SearchScreen(),
       const AddAdsScreen(),
       const MyAvizScreen()
     ];
